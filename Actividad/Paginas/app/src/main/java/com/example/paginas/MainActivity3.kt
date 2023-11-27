@@ -17,7 +17,7 @@ class MainActivity3 : AppCompatActivity() {
         val et3 = findViewById<EditText>(R.id.mat)
         val boton1 = findViewById<Button>(R.id.balta)
         val boton2 = findViewById<Button>(R.id.brfc)
-        val boton3 = findViewById<Button>(R.id.bnombre)  // Renombré el botón para mayor claridad
+        val boton3 = findViewById<Button>(R.id.bnombre)
         val boton4 = findViewById<Button>(R.id.bbaja)
         val boton5 = findViewById<Button>(R.id.bmenu)
 
@@ -39,7 +39,7 @@ class MainActivity3 : AppCompatActivity() {
         boton2.setOnClickListener {
             val admin = AdminSQLiteOpenHelper(this, "administracion", null, 1)
             val bd = admin.writableDatabase
-            val fila = bd.rawQuery("SELECT nombre, materia FROM maestros WHERE rfc=?'${et1.text.toString()}'", null)
+            val fila = bd.rawQuery("SELECT nombre, materia FROM maestros WHERE rfc='${et1.text.toString()}'", null)
             if (fila.moveToFirst()) {
                 et2.setText(fila.getString(0))
                 et3.setText(fila.getString(1))
@@ -65,7 +65,7 @@ class MainActivity3 : AppCompatActivity() {
         boton4.setOnClickListener {
             val admin = AdminSQLiteOpenHelper(this, "administracion", null, 1)
             val bd = admin.writableDatabase
-            val cant = bd.delete("maestros", "rfc=?'${et1.text.toString()}'", null)
+            val cant = bd.delete("maestros", "rfc='${et1.text.toString()}'", null)
             bd.close()
             et1.setText("")
             et2.setText("")
